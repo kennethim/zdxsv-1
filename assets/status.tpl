@@ -16,7 +16,7 @@
 body { padding-top: 70px; }
 </style>
 
-<title>ガンダムvs.Zガンダム エミュ鯖ステータス</title>
+<title>Gundam vs Z Gundam 私服狀況</title>
 </head>
 
 <body>
@@ -41,7 +41,7 @@ body { padding-top: 70px; }
 {{range .Lives}}
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title"><span class="glyphicon glyphicon-facetime-video"></span> 生放送中</h3>
+    <h3 class="panel-title"><span class="glyphicon glyphicon-facetime-video"></span> 直播中</h3>
   </div>
   <div class="panel-body">
     <div class="media">
@@ -52,7 +52,7 @@ body { padding-top: 70px; }
         <h4 class="media-heading"><a target="_blank" href="{{.LiveUrl}}">{{.Title}}</a></h4>
         <p>{{.Description}}</p>
 		<p>({{.CommunityName}})
-		<a target="_blank" href="{{.LiveUrl}}" class="btn btn-primary btn-lg btn-danger pull-right" role="button">視聴する</a></p>
+		<a target="_blank" href="{{.LiveUrl}}" class="btn btn-primary btn-lg btn-danger pull-right" role="button">觀看</a></p>
       </div>
     </div>
   </div>
@@ -61,8 +61,8 @@ body { padding-top: 70px; }
 {{end}}
 
 <h1>SERVER STATUS</h1>
-<p> {{.NowDate}} 現在の接続状況  <span class="glyphicon glyphicon-info-sign"></span> 60秒毎に自動更新します</p>
-<h3>ロビー {{.LobbyUserCount}} 人</h3>
+<p> {{.NowDate}} 目前連接狀態  <span class="glyphicon glyphicon-info-sign"></span> 每60秒自動更新</p>
+<h3>Lobby {{.LobbyUserCount}} 人</h3>
 <table class="table table-inverse table-sm">
 <thead>
 <tr><th>ID</th><th>HN</th><th>部隊名</th><th>UDP</th></tr>
@@ -73,7 +73,7 @@ body { padding-top: 70px; }
 {{end}}
 </tbody>
 </table>
-<h3>対戦中 {{.BattleUserCount}} 人</h3>
+<h3>對戰中 {{.BattleUserCount}} 人</h3>
 <table class="table table-inverse table-sm">
 <thead>
 <tr><th>ID</th><th>HN</th><th>部隊名</th><th>UDP</th></tr>
@@ -85,15 +85,15 @@ body { padding-top: 70px; }
 </tbody>
 </table>
 
-<h2>チャット</h2>
+<h2>聊天室</h2>
 {{if .ChatInviteUrl}}
-<a target="_blank" href="{{.ChatInviteUrl}}" class="btn btn-primary btn-sm btn-primary" role="button">参加する</a>
+<a target="_blank" href="{{.ChatInviteUrl}}" class="btn btn-primary btn-sm btn-primary" role="button">參加</a>
 {{end}}
 {{if .ChatUrl}}
-<a target="_blank" href="{{.ChatUrl}}" class="btn btn-primary btn-sm btn-success" role="button">開く</a>
+<a target="_blank" href="{{.ChatUrl}}" class="btn btn-primary btn-sm btn-success" role="button">打開</a>
 {{end}}
 
-<p>オンライン{{len .OnlineChatUsers}}人 オフライン{{len .OfflineChatUsers}}人</p>
+<p>在線{{len .OnlineChatUsers}}人 離線{{len .OfflineChatUsers}}人</p>
 <table class="table table-sm table-striped table-condensed table-inverse">
 <tbody>
 {{range .OnlineChatUsers}}

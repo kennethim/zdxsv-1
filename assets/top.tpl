@@ -11,7 +11,7 @@
   -->
   <BODY text="white" link="white" background="afs://02/101.PNG" >
     <center>
-      ガンダムvs.Zガンダム エミュ鯖 1.0
+      Gundam vs Z Gundam 港澳台私服 v1.0
       <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
         <TR>
           <TD><IMG SRC="afs://02/124.PNG" width="36"  height="26"></TD>
@@ -24,20 +24,20 @@
           <b>
             <font size=2>
               <center>
-                ※注意
+                ※注意<BR>
               <br>
-                以下の注意書きに同意の上ご利用ください<br>
+                請同意以下條款才繼續進行遊戲<br>
               </center>
               <br>
-              このサーバは公式サービスではありません。<BR>
-              BANDAI様、カプコン様、KDDI様とは一切関係ありませんので、お問い合わせ等なさらぬようお願いします。<BR>
+              1. 此伺服器非官方提供、它與 BANDAI、CAPCOM、KDDI 無任何關係。<BR>
+			  <br>
+              2. 這是一項非官方服務、用戸需自行承擔所有可能發生的風險。<BR>
               <br>
-              非公式サービスです。ご利用は自己責任でお願いします。<BR>
+              3. 用戸帳號可能會隨時被刪除、恕不作通知。<BR>
               <br>
-              ユーザアカウントは予告無く消去される場合があります。あらかじめご了承ください。<br>
+              4. 請注意、此伺服器可能會隨時終止營運。<br>
               <br>
-              予告無くサービスを終了する可能性があります。あらかじめご了承ください。<br>
-              <br>
+              ※特別嗚謝: 日服 zdxsv.net 創始人 Shingo 所提供的源代碼。<br>
             </font>
           </b>
           <TD><IMG SRC="afs://02/113.PNG" width="36" height="240"></TD>
@@ -51,18 +51,18 @@
       <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
         <form name=form1 method="POST" action="login">
           <TR>
-            <TD WIDTH=275 align=center><input type="image" src="assets/login.png" alt="ログイン" width="221" height="30"/></TD>
+            <TD WIDTH=275 align=center><input type="image" src="assets/login.png" alt="登入" width="221" height="30"/></TD>
             <TD WIDTH=275 align=center><a href="register"><img src="assets/register.png" alt="新規登録" width="221" height="30"></a></TD>
           </TR>
           <TR>
             <TD WIDTH=275 align=center><!--INPUT-ID--><input type="password" name="login_key"></TD>
             <font size=1>
-              <TD WIDTH=275 align=center>(メモリーカードに保存して下さい)</TD>
+              <TD WIDTH=275 align=center>( 儲存至 Memory Card )</TD>
             </font>
           </TR>
         </form>
       </TABLE>
-<!-- <a href="https://35.187.206.118/00000020/CRS-top.jsp">開発サーバ</a> -->
+<!-- <a href="https://172.16.101.247/00000020/CRS-top.jsp">開發伺服器</a> -->
     </center>
   </BODY>
 </HTML>

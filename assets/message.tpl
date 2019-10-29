@@ -15,7 +15,7 @@
 
   <BODY text="white" link="white" background="afs://02/101.PNG" >
     <center>
-      ガンダムvs.Zガンダム エミュ鯖 {{.ServerVersion}}
+      Gundam vs Z Gundam 港澳台私服 v{{.ServerVersion}}
       <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
         <TR>
           <TD><IMG SRC="afs://02/124.PNG" width="36"  height="26"></TD>
@@ -42,7 +42,7 @@
       </TABLE>
       <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
         <TR>
-          <TD WIDTH=275 align=center><a href="CRS-top.jsp"><img src="assets/back.png" alt="戻る" width="221" height="30"></a></TD>
+          <TD WIDTH=275 align=center><a href="CRS-top.jsp"><img src="assets/back.png" alt="返回" width="221" height="30"></a></TD>
         </TR>
       </TABLE>
     </center>

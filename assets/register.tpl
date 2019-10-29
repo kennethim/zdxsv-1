@@ -14,7 +14,7 @@
 
   <BODY text="white" link="white" background="afs://02/101.PNG" >
     <center>
-      ガンダムvs.Zガンダム エミュ鯖β ({{.Version}})
+      Gundam vs Z Gundam 港澳台私服β v({{.Version}})
       <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
         <TR>
           <TD><IMG SRC="afs://02/124.PNG" width="36"  height="26"></TD>
@@ -40,7 +40,7 @@
       </TABLE>
       <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
        <TR>
-          <TD WIDTH=275 align=center><a href="top.wsgi"><!--CHG-IMG-BUTTON-3--><img src="back.png" alt="戻る" width="221" height="30"></a></TD>
+          <TD WIDTH=275 align=center><a href="top.wsgi"><!--CHG-IMG-BUTTON-3--><img src="back.png" alt="返回" width="221" height="30"></a></TD>
        </TR>
       </TABLE>
     </center>
