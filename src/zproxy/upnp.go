@@ -34,7 +34,7 @@ func addUDPPortMapping(localIP string, port uint16) {
 			if err != nil {
 				log.Println("addUDPPortMapping error: ", err)
 			} else {
-				log.Println("UPnPによりポート開放しました", dev.ModelName, localIP, port)
+				log.Println("UPnP 開放的端口", dev.ModelName, localIP, port)
 			}
 		}
 	}

@@ -21,7 +21,7 @@ import (
 	"zdxsv/pkg/db"
 )
 
-var cpu = flag.Int("cpu", 2, "setting GOMAXPROCS")
+var cpu = flag.Int("cpu", 1, "setting GOMAXPROCS")
 var profile = flag.Int("profile", 1, "0: no profile, 1: enable http pprof, 2: enable blocking profile")
 
 func pprofPort(mode string) int {

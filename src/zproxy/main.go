@@ -31,12 +31,12 @@ func isPS2FirstData(data []byte) bool {
 
 func main() {
 	log.Println("===========================================================")
-	log.Printf("zproxy - ガンダムvs.Zガンダム RUDP-Proxy (v%v, ver.%v)\n", releaseVersion, protocolVersion)
+	log.Printf("zproxy - Gundam vs Z Gundam RUDP-Proxy (v%v, ver.%v)\n", releaseVersion, protocolVersion)
 	log.Println("===========================================================")
-	log.Println("初めて使用する場合, 必ず接続テスト対戦を行ってください.")
-	log.Println("ケネディポートの自動選抜に入ることでテスト対戦を開始します.")
-	log.Println("PCがスリープしないように設定をお願いします.")
-	log.Println("対戦中はソフトを終了しないでください.")
+	log.Println("初次使用時, 請務必進行連接測試.")
+	log.Println("請進入「ケネディポート」然後選擇「自動選抜」進行 UDP 測試.")
+	log.Println("請關閉 PC 的休眠模式.")
+	log.Println("對戰期間請勿關閉本程式.")
 
 	if conf.CheckUpdate {
 		printReleaseInfo()
@@ -122,32 +122,32 @@ func (z *Zproxy) Setup() bool {
 	go func() {
 		err := z.ps2sv.Listen(fmt.Sprintf(":%d", conf.TCPListenPort))
 		if err != nil {
-			log.Fatalln("サーバを立ち上げられませんでした", err)
+			log.Fatalln("無法啟動伺服器", err)
 		}
 	}()
 
 	tmpConn, err := net.DialTimeout("tcp4", "google.com:80", time.Second)
 	if err != nil {
-		log.Println("ローカルIPアドレスの取得に失敗しました")
+		log.Println("Local IP Address 取得失敗")
 		return false
 	}
 	tcpAddr, ok := tmpConn.LocalAddr().(*net.TCPAddr)
 	tmpConn.Close()
 	if !ok {
-		log.Println("ローカルIPアドレスの取得に失敗しました")
+		log.Println("Local IP Address 取得失敗")
 		return false
 	}
 	z.selfLocalIP = tcpAddr.IP
-	log.Println("ローカルIP:", z.selfLocalIP.String())
+	log.Println("Local IP:", z.selfLocalIP.String())
 
 	tmpAddr, err := net.ResolveUDPAddr("udp4", fmt.Sprintf(":%d", conf.UDPListenPort))
 	if err != nil {
-		log.Println("UDPアドレスの取得に失敗しました", err)
+		log.Println("UDP Address 取得失敗", err)
 		return false
 	}
 	udpConn, err := net.ListenUDP("udp4", tmpAddr)
 	if err != nil {
-		log.Println("UDPアドレスの取得に失敗しました", err)
+		log.Println("UDP Address 取得失敗", err)
 		return false
 	}
 
@@ -175,7 +175,7 @@ func (z *Zproxy) Setup() bool {
 	})
 
 	if conf.LobbyRPCAddr == z.selfLocalIP.String() {
-		log.Println("ローカルモード使用します")
+		log.Println("使用 Local Mode")
 	}
 	svAddr, err := net.ResolveUDPAddr("udp4", conf.LobbyRPCAddr)
 	for i := 0; i < 5; i++ {
@@ -191,13 +191,13 @@ func (z *Zproxy) Setup() bool {
 	}
 
 	if publicAddr == "" {
-		log.Println("UDPアドレスの取得に失敗しました.")
+		log.Println("UDP Address 取得失敗.")
 		return false
 	}
 
 	z.selfUDPAddrs = append(z.selfUDPAddrs, publicAddr)
 	z.selfUDPAddrs = append(z.selfUDPAddrs, fmt.Sprint(z.selfLocalIP, ":", conf.UDPListenPort))
-	log.Println("UDPアドレス:", z.selfUDPAddrs)
+	log.Println("UDP Address:", z.selfUDPAddrs)
 
 	setupLobbyRPC()
 	go addUDPPortMapping(z.selfLocalIP.String(), conf.UDPListenPort)
@@ -292,11 +292,11 @@ func (z *Zproxy) PollLobby() error {
 			return err
 		}
 		if prevMessage != resp.Message {
-			log.Println("サーバー:", resp.Message)
+			log.Println("Server:", resp.Message)
 		}
 		prevMessage = resp.Message
 		if resp.Result {
-			log.Println("ロビーユーザ")
+			log.Println("Lobby User")
 			for _, u := range resp.LobbyUsers {
 				pro := "(TCP)"
 				if u.UDP {
@@ -312,7 +312,7 @@ func (z *Zproxy) PollLobby() error {
 			z.userId = resp.UserId
 			lobbyUsers = resp.LobbyUsers
 			mtx.Unlock()
-			log.Println("あなたのユーザID:", resp.UserId)
+			log.Println("Your User ID:", resp.UserId)
 			sendPingToLobbyUsers()
 		}
 		return nil
@@ -379,7 +379,7 @@ func (z *Zproxy) PollLobby() error {
 			if !ok {
 				return fmt.Errorf("PS2Server closed")
 			}
-			log.Println("PS2との接続に成功しました")
+			log.Println("成功與 PS2 連接")
 			z.ps2cl = ps2cl
 			return prepareBattle()
 		}
@@ -430,7 +430,7 @@ func (z *Zproxy) ServeBattle() error {
 	defer cancel()
 
 	if z.testBattle {
-		log.Println("テスト対戦を開始します")
+		log.Println("開始進行 UDP 測試對戰")
 		z.ps2cl.Write(firstData)
 		z.ps2cl.Serve(ctx, func(data []byte) {
 			if len(data) == 4 &&
@@ -438,16 +438,16 @@ func (z *Zproxy) ServeBattle() error {
 				data[1] == 0xF0 &&
 				data[2] == 0x00 &&
 				data[3] == 0x00 {
-				log.Println("対戦の終了を検出しました")
+				log.Println("檢測出對戰已結束")
 				z.ps2cl.Close()
 			}
 		})
 		return nil
 	}
 
-	log.Println("UDP通信を開始します")
+	log.Println("開始進行 UDP 通信")
 	if !z.GreetBattleServer() {
-		log.Println("対戦サーバとの接続に失敗しました.")
+		log.Println("無法連接伺服器.")
 		return fmt.Errorf("Failed to greet battle server")
 	}
 
@@ -486,7 +486,7 @@ func (z *Zproxy) ServeBattle() error {
 			default:
 			}
 			if len(data) == 4 && data[0] == 0x04 && data[1] == 0xF0 && data[2] == 0x00 && data[3] == 0x00 {
-				log.Println("対戦の終了を検出しました")
+				log.Println("檢測出對戰已結束")
 				z.ps2cl.Close()
 			}
 		})

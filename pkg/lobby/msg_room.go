@@ -93,7 +93,7 @@ var _ = register(0x6407, "RequestCreateRoom", func(p *AppPeer, m *Message) {
 		w.Write16(roomId)
 	} else {
 		a.Status = StatusError
-		w.WriteString("<B>エラー<B> ")
+		w.WriteString("<B>Error<B> ")
 	}
 	p.SendMessage(a)
 })
@@ -387,6 +387,6 @@ func NoticeJoinRoom(p *AppPeer, userId, name, team string) {
 func NoticeRemoveRoom(p *AppPeer) {
 	n := NewServerNotice(0x6505)
 	w := n.Writer()
-	w.WriteString("<BODY><LF=6><CENTER>部屋が解散になりました。<END>")
+	w.WriteString("<BODY><LF=6><CENTER>房間解散了。<END>")
 	p.SendMessage(n)
 }

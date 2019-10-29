@@ -58,15 +58,15 @@ func Prepare() {
 	se = mahonia.NewEncoder("Shift_JIS")
 }
 
-var messageRegister = `<br><br><br><br><br><br>
-	ユーザ作成が完了しました。 <br>
-	メモリカードにIDを保存して戻って下さい。<br>`
+var messageRegister = `<br><br><br><br><br>
+	用戶帳號創建完成。 <br>
+	儲存至 Memory Card 後返回。<br>`
 var messageLoginFail = `<br><br><br><br><br><br>
-	ログインに失敗しました。<br>
-	アカウントをお持ちでない場合はTOPから新規登録してください。<br>`
+	登入失敗。<br>
+	如果還未建立帳號請返回上頁註冊。<br>`
 var messageMainte = `<br><br><br><br><br><br>
-   現在メンテナンス中です。<br>
-   しばらく時間を置いてから再度ログインしてください。<br>`
+   系統目前正在維護中。<br>
+   請稍後再嘗試登入。<br>`
 
 type commonParam struct {
 	ServerVersion string
@@ -135,7 +135,7 @@ func HandleRegisterPage(w http.ResponseWriter, r *http.Request) {
 		glog.Errorln(err)
 		w.Header().Set("Content-Type", "text/html; charset=cp932")
 		w.WriteHeader(200)
-		writeMessagePage(w, r, "登録に失敗しました")
+		writeMessagePage(w, r, "註冊失敗")
 	}
 	w.Header().Set("Content-Type", "text/html; charset=cp932")
 	w.WriteHeader(200)

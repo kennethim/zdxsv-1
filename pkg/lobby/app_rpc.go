@@ -44,20 +44,20 @@ func (m *lobbyRPC) registerProxy(remoteAddr string, req *RegisterProxyRequest) *
 
 	if req.CurrentVersion < requiredVersion {
 		res.Result = false
-		res.Message = "プロキシソフトのバージョンが古いです"
+		res.Message = "Proxy 軟件版本過時"
 		return res
 	}
 
 	if len(req.UDPAddrs) == 0 {
 		res.Result = false
-		res.Message = "UDPアドレスが取得できていません"
+		res.Message = "UDP Address 尚未取得"
 		return res
 	}
 
 	arrRemote := strings.Split(remoteAddr, ":")
 	if len(arrRemote) != 2 {
 		res.Result = false
-		res.Message = "無効なグローバルIPアドレスです"
+		res.Message = "無效的 Global IP Address"
 		return res
 	}
 
@@ -71,7 +71,7 @@ func (m *lobbyRPC) registerProxy(remoteAddr string, req *RegisterProxyRequest) *
 
 	if req.LocalIP == nil || req.LocalIP.To4() == nil {
 		res.Result = false
-		res.Message = "無効なローカルIPアドレスです"
+		res.Message = "無效的 Local IP Address"
 		return res
 	}
 
@@ -92,7 +92,7 @@ func (m *lobbyRPC) registerProxy(remoteAddr string, req *RegisterProxyRequest) *
 
 		if userPeer == nil {
 			res.Result = false
-			res.Message = "ロビーにユーザが見つかりません"
+			res.Message = "在 Lobby 中找不到用戶"
 			return
 		}
 
@@ -126,14 +126,14 @@ func (m *lobbyRPC) getBattleInfo(remoteAddr string, req *BattleInfoRequest) *Bat
 
 	if req.SessionId == "" {
 		res.Result = false
-		res.Message = "セッションIDが無効です."
+		res.Message = "Invalid session ID."
 	}
 
 	m.app.Locked(func(app *App) {
 		battle, ok := app.battles[req.SessionId]
 		if !ok {
 			res.Result = false
-			res.Message = "対戦情報が見つかりません."
+			res.Message = "找不到對戰情報."
 			return
 		}
 
@@ -146,7 +146,7 @@ func (m *lobbyRPC) getBattleInfo(remoteAddr string, req *BattleInfoRequest) *Bat
 
 		if userId == "" {
 			res.Result = false
-			res.Message = "対戦情報にユーザが見つかりません."
+			res.Message = "在對戰情報中找不到用戶."
 			return
 		}
 
@@ -161,7 +161,7 @@ func (m *lobbyRPC) getBattleInfo(remoteAddr string, req *BattleInfoRequest) *Bat
 				Team:   u.Team,
 			})
 		}
-		res.Message = "対戦情報取得成功"
+		res.Message = "對戰情報取得成功"
 	})
 
 	return res
