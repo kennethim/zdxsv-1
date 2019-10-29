@@ -4,7 +4,7 @@ services:
     build: "./docker/https-portal"
     restart: always
     environment:
-      DOMAINS: 'zdxsv.example.com -> http://web:80'
+      DOMAINS: 'zdxonline.com -> http://web:80'
       STAGE: 'local'
   web:
     ports:
