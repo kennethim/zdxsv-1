@@ -2,10 +2,11 @@ package lobby
 
 import (
 	"fmt"
-	"github.com/golang/glog"
 	"strconv"
 	"zdxsv/pkg/db"
 	. "zdxsv/pkg/lobby/message"
+
+	"github.com/golang/glog"
 )
 
 // 6007 : ServerFull サーバ選択画面へ
@@ -25,7 +26,7 @@ var _ = register(0x6002, "GotoBattle", func(p *AppPeer, m *Message) {
 func SendServerShutDown(p *AppPeer) {
 	n := NewServerNotice(0x6003)
 	w := n.Writer()
-	w.WriteString("<BODY><LF=6><CENTER>サーバがシャットダウンしました<END>")
+	w.WriteString("<BODY><LF=6><CENTER>Shutdown Server<END>")
 	p.SendMessage(n)
 }
 
@@ -126,8 +127,12 @@ var _ = register(0x614C, "GetTopInformation", func(p *AppPeer, m *Message) {
 	a := NewServerAnswer(m)
 	w := a.Writer()
 	w.Write8(0)
-	//w.Write8(1)
-	//w.WriteString("<B>こんにちはこんにちはこんにちは<B>")
+	/*
+		FIXME:
+		It's works but buggy...
+		w.Write8(1)
+		w.WriteString("<BODY><LF=5><CENTER>ー引入了試驗性質的按掣延遲緩減技術ー<BR><BR>建議配合 UDP Proxy 使用。<BR>如出現死機或系統錯誤的問題請匯報給我。<END>")
+	*/
 	p.SendMessage(a)
 })
 
