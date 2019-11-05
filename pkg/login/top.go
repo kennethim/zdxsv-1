@@ -1,6 +1,7 @@
 package login
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
 	"text/template"
@@ -59,13 +60,16 @@ func Prepare() {
 }
 
 var messageRegister = `<br><br><br><br><br>
-	用戶帳號創建完成。 <br>
-	儲存至 Memory Card 後返回。<br>`
-var messageLoginFail = `<br><br><br><br><br><br>
+	用戸帳號創建完成。 <br>
+	<br>
+	儲存 ID 至 Memory Card 後返回。<br>`
+var messageLoginFail = `<br><br><br><br><br>
 	登入失敗。<br>
+	<br>
 	如果還未建立帳號請返回上頁註冊。<br>`
 var messageMainte = `<br><br><br><br><br><br>
    系統目前正在維護中。<br>
+   <br>
    請稍後再嘗試登入。<br>`
 
 type commonParam struct {
@@ -99,6 +103,12 @@ func HandleLoginPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	a, err := db.DefaultDB.GetAccountByLoginKey(loginKey)
+	if err == sql.ErrNoRows && len(loginKey) == 10 {
+		// Since this login key seems to have been registered on another server,
+		// new registration is performed.
+		a, err = db.DefaultDB.RegisterAccountWithLoginKey(r.RemoteAddr, loginKey)
+	}
+
 	if err != nil {
 		glog.Errorln(err)
 		w.Header().Set("Content-Type", "text/html; charset=cp932")
